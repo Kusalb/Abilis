@@ -1,0 +1,177 @@
+{% extends 'home.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+      {% if added %}
+                <script>alert("Document Added")</script>
+            {% endif %}
+
+
+<div id="page-content-wrapper">
+    <div class="section-wrapper">
+        <h3 class="text-center">Add Document</h3>
+    </div>
+    <div class="section-wrapper form-bg">
+        <form method="POST" name="form"  enctype="multipart/form-data" class="form-horizontal" >{% csrf_token %}
+
+            <div class = "form-group">
+                <label for = "id_title" class = "control-label col-sm-2 ">Title*</label>
+                <div class = "col-sm-4 no-outline">
+                    <input type="text" id="id_title" name="title" placeholder="Title Here" required style="width: 100%">
+                </div>
+<!--                <div class = "col-sm-2 no-outline">-->
+<!--                    <input type="text" placeholder="Middle Name">-->
+<!--                </div>-->
+<!--                <div class = "col-sm-2 no-outline">-->
+<!--                    <input type="text" placeholder="Last Name" required>-->
+                </div>
+<!--            </div>-->
+            <div class = "form-group">
+                <label for = "id_date" class = "control-label col-sm-2 ">Date*</label>
+                <div class = "col-sm-2 no-outline">
+                    <input type="date" id="id_date" name="date" placeholder="Date" required>
+                </div>
+            </div>
+
+{#            <div class="form-group">#}
+{#                    <label for="id_category" class="control-label col-sm-2 ">Disabled Category*</label>#}
+{#                    <div class="col-sm-4">#}
+{#                        <select class="form-control" name="category" id="id_category" required>#}
+{#                            <option value="Visually Impaired">Visually Impaired</option>#}
+{#                            <option value="Hearing Impaired">Hearing Impaired</option>#}
+{#                            <option value="No Leg">No Leg</option>#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+
+            <div class="form-group">
+                <label for="id_new_category" class="control-label col-sm-2 ">Disabled Category*</label>
+                <div class="col-sm-4">
+{#                    <select class="form-control" name="category" id="id_new_category" multiple = "multiple" required>#}
+{#                        {% for add_category in add_category %}#}
+{#                            <option value="{{ add_category.new_category }}">{{ add_category.new_category }}</option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                    <input type ="checkbox" onclick="toggle()"/>Select All#}
+                    {% for add_category in add_category %}
+                    <input type="checkbox" name="category" value="{{ add_category.new_category }}" id ={{ add_category.id  }}> {{ add_category.new_category }}<br>
+                   {% endfor %}
+                </div>
+
+                <div class ="col-sm-4">
+                    <a class="fa fa-fw fa-plus"  href="{% url 'add_category' %}">Category</a>
+                          <div class ="col-sm-4">
+                                <a class="fa fa-list"  href="{% url 'list_category'  %}">list category</a>
+                          </div>
+
+
+           </div>
+            </div>
+
+
+
+      <div class = "form-group">
+                <label for = "id_doc_category" class = "control-label col-sm-2 ">Document Category*</label>
+          <div class = "col-sm-4">
+                    <select  class = "form-control" name = "doc_category" id="id_doc_category" required>
+
+                        {% for add_doc_category in add_doc_category %}
+
+
+                            <option value="{{ add_doc_category.doc_category }}">{{ add_doc_category.doc_category }}</option>
+
+
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+       <div class ="col-sm-4">
+                    <a class="fa fa-fw fa-plus"  href="{% url 'add_document_category' %}">Category</a>
+                          <div class ="col-sm-4">
+                                <a class="fa fa-list"  href="{% url 'list_document_category'  %}">list category</a>
+                          </div>
+
+
+           </div>
+            </div>
+
+        <div class = "form-group">
+                <label for = "id_description" class = "control-label col-sm-2 ">Description*</label>
+                <div class = "col-sm-4 no-outline">
+                    <input type="text" id="id_description" name="description" placeholder="Description Here" required  style="width: 100%">
+                </div>
+        </div>
+
+          <div class = "form-group">
+                <label for = "id_information" class = "control-label col-sm-2 ">Information*</label>
+                <div class = "col-sm-6 no-outline">
+                <textarea name="information" id="id_information"  ></textarea>
+                </div>
+        </div>
+
+
+
+
+{# <div class="form-group">#}
+{#                <label for="id_my_field" class="control-label col-sm-2 ">Choice:*</label>#}
+{#                <div class="col-sm-4">#}
+{#                    <select class="form-control" name="my_field" id="id_my_field" multiple = "multiple" required>#}
+{#                        {% for c in form.my_field %}#}
+{#                            <option value="{{ c }}">{{ c }}</option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{##}
+{#                </div>#}
+
+        <div class = "form-group">
+                <label for = "id_doc_category" class = "control-label col-sm-2 ">Document*</label>
+                <div class = "col-sm-4 no-outline">
+                    <input type="file" accept="application/msword" id="id_doc_category" name="document" placeholder="docs">
+                </div>
+        </div>
+
+{#        <div class = "form-group">#}
+{#                <div class = "col-sm-2 no-outline">#}
+{#                    <input type="file" accept="application/msword" id="id_doc_category" name="document" placeholder="docs">#}
+{#                </div>#}
+{#            </div>#}
+      <div class = "form-group">
+                <div class = "col-sm-2 no-outline">
+                    <input type="hidden"  id="id_info_file" name="info_file" >
+                </div>
+            </div>
+
+
+            <div class = "col-sm-8">
+                <input type="submit" onclick="return validateForm()" class="btn submit-btn" value="Add">
+            </div>
+
+        </form>
+    </div>
+</div>
+    <script>
+
+        function validateForm() {
+            var x = document.forms["form"]["information"].value || document.forms["form"]["document"].value;
+            console.log(x);
+            if (x== "") {
+                alert("Both Information and Document can't be empty");
+                return false;
+
+            }
+        }
+        function toggle() {
+  checkboxes = document.getElementsByName('category');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+    </script>
+{% endblock %}
+
+
+
+

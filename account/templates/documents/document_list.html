@@ -1,0 +1,102 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+    {% if added %}
+        <script>alert("Document Edited")</script>
+    {% endif %}
+
+    <div id="page-content-wrapper">
+        <div class="section-wrapper">
+            <h3 class="list-header">Document List</h3>
+            <form action="{% url 'search_document' %}" method="POST" class="form-inline mt-2 mt-md-0 right topmargin25"
+                  style="float: right">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                       name="keyword_document">
+                <select name="document_column" class="btn btn-light">
+                    <option value="title">Title</option>
+                    <option value="date">Date</option>
+                    {#            <option value="category">Document Category</option>#}
+                </select>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="search">Search</button>
+            </form>
+        </div>
+        <div class="section-wrapper">
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Document Category</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                {% for documents in document %}
+
+                    <tbody>
+                    <tr>
+                        <td>{{ documents.title }}</td>
+                        <td>{{ documents.date|date:'Y-m-d' }}</td>
+                        <td>{{ documents.doc_category }}</td>
+                        <td>{{ documents.description }}</td>
+
+
+                        <td>
+
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary" data-toggle="dropdown">
+                                    Action <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'document_edit' pk=documents.pk %}">Edit</a></li>
+                                    <li><a href="{% url 'document_delete' pk=documents.pk %}"
+                                           onclick="return confirm('Are you sure?')">Delete</a></li>
+                                </ul>
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+
+                {% endfor %}
+
+            </table>
+            {% if  count == 0 %}
+                <h3 class="text-center">Nothing to show!</h3>
+            {% endif %}
+
+            {% if document.has_other_pages %}
+                <ul class="pagination">
+                    {% if document.has_previous %}
+                        <li><a href="?page={{ document.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in document.paginator.page_range %}
+                        {% if document.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if document.has_next %}
+                        <li><a href="?page={{ document.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+

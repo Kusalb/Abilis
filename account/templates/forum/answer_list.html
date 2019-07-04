@@ -1,0 +1,86 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-content-wrapper">
+        <div class="section-wrapper">
+            <h3 class="list-header">Answer List</h3>
+            <form action="{% url 'search_answer' %}" method="POST" class="form-inline mt-2 mt-md-0 right topmargin25"
+                  style="float: right">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                       name="keyword_answer">
+                <select name="answer_column" class="btn btn-light">
+                    <option value="question">Question</option>
+                    <option value="answer">answer</option>
+                </select>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="search">Search</button>
+            </form>
+        </div>
+
+
+        <div class="section-wrapper">
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                {% for ans in answer %}
+
+                    <tbody>
+                    <tr>
+                        <td>{{ ans.question }}</td>
+                        <td>{{ ans.answer }}</td>
+
+                        <td>
+                            <div class="button">
+
+                                <a class="dropdown-item" href="{% url 'answer_delete' id=ans.pk %}"
+                                   onclick="return confirm('Are you sure?')">
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                    </tbody>
+
+                {% endfor %}
+            </table>
+                 {% if  count == 0 %}
+                <h3 class="text-center">Nothing to show!</h3>
+            {% endif %}
+
+
+            {% if answer.has_other_pages %}
+                <ul class="pagination">
+                    {% if answer.has_previous %}
+                        <li><a href="?page={{ answer.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in answer.paginator.page_range %}
+                        {% if answer.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if answer.has_next %}
+                        <li><a href="?page={{ answer.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}

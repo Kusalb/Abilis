@@ -1,0 +1,282 @@
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+html, body{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-family: Roboto;
+}
+/*#####################################header css##################################*/
+.header{
+    height: 9%;
+    background: #34383c;
+    width: 100%;
+    position: fixed;
+    top:0;
+    z-index: 15;
+    border-bottom: 6px solid #fff200;
+}
+.header-font{
+    color:#ffffff;
+    margin-right: 4%;
+}
+.header-menu{
+    height: 100%;
+}
+.logo{
+    height: 100%;
+    width: 8%;
+    position: absolute;
+    left: 48%;
+}
+.user-account{
+    height: 100%;
+    background: #1e2226;
+    float: right;
+    width: 15%;
+    padding-top:1%;
+}
+.icon-image{
+    width: 24px;
+    height: 24px;
+}
+
+/*style for user account*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+
+    display: none;
+    position: absolute;
+    background-color: #1e2226;
+    color: #ffffff;
+    min-width: 100%;
+    z-index: 1;
+    right: 0;
+    margin-top:6%;
+
+}
+.dropdown-content li{
+    list-style: none;
+}
+.dropdown-content li:hover{
+    background-color: #fff200;
+
+}
+.dropdown-content li a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.dropdown-content li a:hover{
+    color: #1e2226;
+    background-color: #fff200;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.profile-img-header{
+    border-radius: 45%;
+    height: 25px;
+    width: 25px;
+    margin-left: 5%;
+}
+.profile-img{
+    height: 80px;
+    width: 70px;
+    padding-top: 15%;
+    padding-left: 10%;
+
+}
+.insights-green{
+    width: 10%;
+    border-left: #91c46b 2px solid;
+    padding-left: 2%;
+    height: auto;
+}
+.insights-torq{
+    width: 10%;
+    border-left: #287e7e 2px solid;
+    padding-left: 2%;
+    height: auto;
+}
+.insights-red{
+    width: 10%;
+    border-left: #f15822 2px solid;
+    padding-left: 2%;
+    height: auto;
+}
+.list-header{
+    width:35%;
+    display: inline-block;
+}
+.topmargin25{
+    margin-top: 25px;
+}
+.right{
+    float: right;
+}
+
+.user-name-header{
+    color: #ffffff;
+    margin-left: 6%;
+}
+.user-name-header a:hover{
+    color: #51575c;
+    text-decoration: none;
+}
+.logout-btn{
+    background: #239249;
+    color: #ffffff
+}
+.logout-btn:hover{
+    background: #98312a;
+}
+/*##########################################header css ends###########################*/
+/*main-content*/
+#wrapper{
+    min-height: 100%;
+}
+#page-content-wrapper{
+    width:86%;
+    min-height: 100%;
+    position: relative;
+    margin-top:3%;
+    padding: 15px;
+    margin-left: 14%;
+    background-color: #f1f1f1;
+    /*height: auto;*/
+}
+.section-wrapper{
+    background: #FFFFFF;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    overflow: auto;
+    box-shadow: 0 12px 18px rgba(0,0,0,0.12);
+}
+.half-section-wrapper{
+    background: #FFFFFF;
+    width: 49%;
+    float: right;
+    margin-right:1%;
+    margin-bottom: 20px;
+    padding: 15px;
+    overflow: auto;
+    box-shadow: 0 12px 18px rgba(0,0,0,0.12);
+
+}
+.no-left-margin{
+    margin-left: 0!important;
+}
+.no-pad{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.no-margin{
+    margin-left: 0;
+    margin-right: 0;
+}
+.bottom-mark{
+    border-bottom: 1px darkgrey solid;
+
+}
+.no-side-pad{
+    padding-left: 0;
+    padding-right: 0;
+}
+/*css for form starts*/
+.no-outline input{
+    font-family: Roboto;
+    border: none;
+    outline: none;
+    background: none;
+    padding-top: 3%;
+    border-bottom: 1px solid #fff200;
+
+}
+th{
+    background: #fff200;
+    color: black;
+    font-style: italic;
+    border-bottom: 1px solid #ddd;
+}
+td{
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+}
+.form-bg{
+    /*background-color: #34383c;*/
+    opacity: 0.9;
+    /*color: white;*/
+    overflow: hidden;
+}
+.submit-btn{
+    background: #fff200;
+    font-family: Roboto;
+    color: black;
+    width: 80%;
+    border: none;
+    font-size: 18px;
+    margin-top: 1%;
+    padding: 2px;
+}
+.submit-btn:hover{
+    opacity: 0.8;
+}
+.text-white{
+    color: white;
+}
+
+
+
+    /*##############################footer css#############################################*/
+.footer{
+    width:100%;
+    height: auto;
+    margin: auto;
+    background: #1e2226;
+    padding: 20px 0px;
+    position: relative;
+    clear: both;
+    z-index: 20;
+}
+.footer-social-icon{
+    width: 100%;
+    height: auto;
+    margin: auto;
+    color: white;
+}
+.footer-social-icon ul{
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+.footer-social-icon ul li{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 0px 1px;
+}
+.footer-menu{
+    width: 100%;
+    height: auto;
+    margin: auto;
+}
+.footer-menu ul{
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+.footer-menu ul li{
+    color: #ffffff;
+    display: inline-block;
+    margin: 0px 5px 25px;
+}
+/*##############################footer css ends#############################################*/

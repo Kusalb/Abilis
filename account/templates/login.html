@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+{#<head>#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#    <style>#}
+{#        body {font-family: Arial, Helvetica, sans-serif;}#}
+{#        form {border: 3px solid #f1f1f1;}#}
+{##}
+{#        input[type=text], input[type=password] {#}
+{#            width: 100%;#}
+{#            padding: 12px 20px;#}
+{#            margin: 8px 0;#}
+{#            display: inline-block;#}
+{#            border: 1px solid #ccc;#}
+{#            box-sizing: border-box;#}
+{#        }#}
+{##}
+{#        button {#}
+{#            background-color: #4CAF50;#}
+{#            color: white;#}
+{#            padding: 14px 20px;#}
+{#            margin: 8px 0;#}
+{#            border: none;#}
+{#            cursor: pointer;#}
+{#            width: 100%;#}
+{#        }#}
+{##}
+{#        button:hover {#}
+{#            opacity: 0.8;#}
+{#        }#}
+{##}
+{##}
+{#        .container {#}
+{#            padding: 16px;#}
+{#        }#}
+{##}
+{##}
+{##}
+{#    </style>#}
+{#</head>#}
+<body>
+
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'style/css/login.css' %}">
+
+{##}
+{#<h1 style="text-align: center">Login Form</h1>#}
+<div style="width:100%; background: rgba(0,0,0,0.6); text-align: center;height: 5rem; color:white; position: relative; top: 0; display: inherit">
+            <img src="{% static 'image/main.jpg' %}" class="img-responsive" style="float: left; height:100%">
+            <h2 class="text-center" style="    margin: 0;
+    padding: 1.5rem;">ADRAD Admin Panel</h2>
+        </div>
+<form method="POST" action="" >
+    <div class="container">
+    {% csrf_token %}
+{#    <div class="container">#}
+{#        <div class="form-group">#}
+{#            <label for="username"><b>Username</b></label>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <input type="text" placeholder="Enter Username" name="username" required>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <label for="password"><b>Password</b></label>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#            <input type="password" placeholder="Enter Password" name="password" required>#}
+{#        </div>#}
+{#        <button type="submit">Login</button>#}
+{#    </div>#}
+{##}
+{#    <div class="logo-box">#}
+{#        <img class="logo" src="{% static 'image/abilis.png' %}">#}
+{#    </div>#}
+
+    <div class="login-box">
+        <div class="text-box-username text-box">
+            <i class="fa fa-user"></i>
+            <input type="text" placeholder="Username" name="username" class="width90" ><br>
+        </div>
+        <div class="text-box-password text-box">
+            <i class="fa fa-lock"></i>
+            <input type="password" placeholder="Password" name="password" class="width90">
+        </div>
+  <button type="submit" class="btn login-btn">Login</button>
+{#        <small class="text-muted ml-2">#}
+{#            <a href="{% url 'password_change' %}">Forgot Password?</a>#}
+{#        </small>#}
+    </div>
+
+    </div>
+</form>
+
+</body>
+</html>

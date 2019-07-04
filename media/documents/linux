@@ -1,0 +1,21 @@
+echo -e
+
+cat
+
+chown -v
+
+| gerp  //matches the pattern and print changing the colour. adding -i ignores case
+
+man command
+
+ll *file name or ll filename* or ll *fileame*  //type certain words of a file, it will find thw whole file.
+ 	use rm * to remove multiple files at a time
+
+ll filename?    //replaces only one character
+
+ll *[d][o]*
+ll [r]* or *[r]      //displays file begining with r or ending with r
+ll [!is]*           //do not include the character
+ll [][]             //range
+
+ps -ef         //show the current status of your device.

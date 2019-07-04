@@ -1,0 +1,78 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div id="page-content-wrapper">
+    <div class="section-wrapper">
+        <h3 class="text-center"> Disable Category List</h3>
+    </div>
+    <div class="section-wrapper">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+
+                <th>Category</th>
+                <th>Action</th>
+
+
+            </tr>
+            </thead>
+
+
+                {% for cat_list in cat_list %}
+
+                    <tbody>
+                    <tr>
+                        <td>{{ cat_list.new_category }}</td>
+
+
+
+
+                        <td>
+                            <div class="button">
+{#                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"#}
+{#                                        aria-haspopup="true" aria-expanded="false">#}
+{#                                    Action#}
+{#                                </button>#}
+{#                                <button class="btn btn-secondary dropdown-toggle" data-toogle="dropdown" aria-haspopup="true" aria-expanded="false" >#}
+
+{#                                    <a class="dropdown-item" href="{% url 'edit_category' pk=catlist.pk %}">Edit</a>#}
+                                    <a href="{% url 'delete_category' pk=cat_list.pk %}"
+                                       onclick="return confirm('Are you sure?')"><button type="button" class="btn btn-danger">Delete</button></a>
+{#                                </button>#}
+                            </div>
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+
+                {% endfor %}
+
+        </table>
+
+    {% if cat_list.has_other_pages %}
+  <ul class="pagination">
+    {% if cat_list.has_previous %}
+      <li><a href="?page={{ cat_list.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in cat_list.paginator.page_range %}
+      {% if cat_list.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if cat_list.has_next %}
+      <li><a href="?page={{ cat_list.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}]

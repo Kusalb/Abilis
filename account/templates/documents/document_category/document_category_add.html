@@ -1,0 +1,28 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+
+
+<div id="page-content-wrapper">
+    <div class="section-wrapper">
+        <h3 class="text-center">Add Document Category</h3>
+    </div>
+    <div class="section-wrapper form-bg">
+        <form method="POST"  enctype="multipart/form-data" class="form-horizontal">
+            {% csrf_token %}
+
+            <div class = "form-group">
+                <label for = "id_doc_category" class = "control-label col-sm-2 ">New Category*</label>
+                <div class = "col-sm-4 no-outline">
+                    <input type="text" id="id_doc_category" name="doc_category" placeholder="Title Here" required style="width: 100%">
+
+                </div>
+
+                </div>
+                                <input type="submit" class="btn submit-btn" value="Add">
+
+        </form>
+    </div>
+</div>
+{% endblock %}

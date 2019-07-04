@@ -1,0 +1,185 @@
+<html>
+<head>
+    <title>Abilis</title>
+
+</head>
+
+{% load staticfiles %}
+
+ <link rel="stylesheet" href="{% static 'style/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'style/css/font-awesome.min.css' %}">
+    <script src="{% static 'style/js/jquery.min.js' %}"></script>
+    <script src="{% static 'style/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style/css/sidebar.css' %}">
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+
+<body>
+
+<div id="wrapper">
+    <!--        Horizontal Header-->
+    <div class="header ">
+        <img src="{% static 'image/abilis.png' %}" class="logo">
+
+        <div class="dropdown user-account">
+{#            <img src="{% static 'image/pp.JPG' %}"  class="dropdown-toggle dropbtn profile-img-header" data-toggle="dropdown"  aria-expanded="true">#}
+            <a class="user-name-header" onclick="myFunction()"> {{ user.username }} <b class="caret"></b></a>
+
+            <div id="myDropdown" class="dropdown-content">
+
+
+                <div class="col-md-12 pad-top no-side-pad ">
+                    <ul class="no-pad">
+                        <li><a href="{% url 'password_change' %}">Change Password</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--        Header Ends here-->
+    <!--        Default side nav bar starts-->
+    <div id ="sidebar-wrapper-default">
+            <ul class="sidebar-nav-default">
+
+                <li class="sub-menu"><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+{#                <li class="sub-menu"><a href="#"><i class="fa fa-list"></i>Translate</a></li>#}
+
+                <li  style="">
+                    <a href="#" class="sub-menu" id="report">
+                        <i class="icon_desktop"></i>
+                        <span><i class="fa fa-file "></i> Document</span>
+                        <span class="fa fa-angle-down pull-right"></span>
+                    </a>
+                    <ul class="sub-report" id="report-list" style="list-style-type:none">
+                        <li class="in-menu"><a href="{% url 'document_new' %}"><i class="fa fa-fw fa-plus"></i> Add Document</a></li>
+                        <li class="in-menu" ><a href="{% url 'document_list' %}"><i class="fa fa-fw fa-list"></i> List Document</a></li>
+                    </ul>
+                </li>
+                <li  style="">
+                    <a href="#" class="sub-menu" id="forum">
+                        <i class="icon_desktop"></i>
+                        <span><i class="fa fa-comments "></i> Forum</span>
+                        <span class="fa fa-angle-down pull-right"></span>
+                    </a>
+                    <ul class="sub-report" id="forum-list" style="list-style-type:none">
+                        <li class="in-menu"><a href="{% url 'question_list' %}"><i class="glyphicon glyphicon-question-sign"></i> Questions </a></li>
+                        <li class="in-menu"><a href="{% url 'answer_list_dashboard' %}"><i class="glyphicon glyphicon-pencil"></i> Answers </a></li>
+                    </ul>
+                </li>
+             </ul>
+    </div>
+
+{% block content %}
+
+{% endblock %}
+
+    <!--        Default side nav bar ends here-->
+
+
+    <script>
+        $(function () {
+            $('#report').click(function () {
+                $('#report-list').slideToggle();
+            });
+            $('#online').click(function () {
+                $('#online-list').slideToggle();
+            });
+
+
+            $('#articles').click(function () {
+                $('#article-list').slideToggle();
+            });
+
+            $('#department').click(function () {
+                $('#department-list').slideToggle();
+            });
+
+
+            $('#faculty').click(function () {
+                $('#faculty-list').slideToggle();
+            });
+
+            $('#contact').click(function () {
+                $('#contact-list').slideToggle();
+            });
+
+            $('#video').click(function () {
+                $('#video-list').slideToggle();
+            });
+
+            $('#inquiry').click(function () {
+                $('#inquiry-list').slideToggle();
+            });
+
+            $('#open-house').click(function () {
+                $('#open-house-list').slideToggle();
+            });
+
+            $('#documents').click(function () {
+                $('#document-list').slideToggle();
+            });
+
+            $('#customize').click(function () {
+                $('#customize-list').slideToggle();
+            });
+
+            $('#forum').click(function () {
+                $('#forum-list').slideToggle();
+            });
+
+        });
+
+//        script for logout starts
+
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-name-header')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        };
+
+        //        script for logout ends
+    </script>
+</div>
+
+
+
+<div class="footer">
+
+        <div class="footer-social-icon">
+            <ul>
+                <li><a href="#"><i class="text-white fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="text-white fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="text-white  fa fa-dribbble"></i></a></li>
+                <li><a href="#"><i class="text-white  fa fa-vimeo"></i></a></li>
+                <li><a href="#"><i class="text-white  fa fa-google-plus"></i></a></li>
+
+            </ul>
+        </div>
+        <p class="text-center">&#169 Logispark technologies 2019- All Right Reserved</p>
+</div>
+
+
+</body>
+</html>
+
+

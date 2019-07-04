@@ -1,0 +1,97 @@
+{% extends 'home.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+    <div id="page-content-wrapper">
+        <div class="section-wrapper">
+            <h3 class="list-header">Question List</h3>
+            <form action="{% url 'search_question' %}" method="POST" class="form-inline mt-2 mt-md-0 right topmargin25">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                       name="keyword_question">
+                <select name="question_column" class="btn btn-light">
+                    <option value="question">Questions</option>
+                    <option value="date">Date</option>
+                    <option value="user">User</option>
+
+                </select>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="search">Search</button>
+            </form>
+        </div>
+
+        <div class="section-wrapper">
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+
+                    <th>Question</th>
+                    <th>Date</th>
+
+                    {#                <th>Description</th>#}
+                    <th>User</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                {% for question in questions %}
+
+                    <tbody>
+                    <tr>
+                        <td>{{ question.question }}</td>
+                        <td>{{ question.date|date:'Y-m-d'}}</td>
+                        <td>{{ question.user.username }}</td>
+
+
+                        <td>
+                            {##}
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary" data-toggle="dropdown">
+                                    Action <span class="caret"></span></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url 'question_answer' id=question.pk %}">Answer</a></li>
+                                    <li><a href="{% url 'question_delete' id=question.pk %}">Delete Question</a></li>
+                                </ul>
+                            </div>
+
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+
+                {% endfor %}
+
+            </table>
+            {% if  count == 0 %}
+                <h3 class="text-center">Nothing to show!</h3>
+            {% endif %}
+
+
+            {% if questions.has_other_pages %}
+                <ul class="pagination">
+                    {% if questions.has_previous %}
+                        <li><a href="?page={{ questions.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in questions.paginator.page_range %}
+                        {% if questions.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if questions.has_next %}
+                        <li><a href="?page={{ questions.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}
