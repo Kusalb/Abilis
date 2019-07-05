@@ -58,6 +58,7 @@ def document_list(request):
 @login_required(login_url='login')
 def document_new(request):
     if request.method == "POST":
+        # request.encoding = 'utf-8'
         form = DocumentationForm(request.POST, request.FILES or None)
         if form.is_valid():
             document = form.save(commit=False)
@@ -74,10 +75,11 @@ def document_new(request):
             document.save()
             cr.close()
             os.remove(file_title + '.txt')
-            document.save()
+
             for cat in selected:
                 category_added = Category.objects.get(new_category=cat)
                 document.category.add(category_added)
+
             category = Category.objects.all()
             doc_category = DocumentCategory.objects.all()
             context = {'added': True, 'add_category': category, 'add_doc_category': doc_category}
@@ -89,8 +91,10 @@ def document_new(request):
         form = DocumentationForm()
         category = Category.objects.all()
         doc_category = DocumentCategory.objects.all()
+
         return render(request, 'documents/document_add.html',
                       {'form': form, 'add_category': category, 'add_doc_category': doc_category})
+
 
 
 @login_required(login_url='login')
@@ -433,6 +437,8 @@ def search_document(request):
                     print(comp)
                 elif v == 'date':
                     comp = Documentation.objects.filter(date__icontains=key)
+                elif v == 'category':
+                    comp = Documentation.objects.filter(doc_category__icontains=key)
             co = comp.count()
             context = {'document': comp, 'count': co}
             return render(request, 'documents/document_list.html', context)
